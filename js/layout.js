@@ -197,4 +197,9 @@
   } else {
     setTimeout(terminarIntro, 0);
   }
+  // CARGAR EL SCRIPT DEL CHAT DE FORMA AUTOMÁTICA
+  const scriptChat = document.createElement("script");
+  scriptChat.src = B + "js/chat.js";
+  scriptChat.async = true;
+  document.body.appendChild(scriptChat);
 })();
