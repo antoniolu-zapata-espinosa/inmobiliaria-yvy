@@ -108,6 +108,20 @@
   body.insertAdjacentHTML("afterbegin", sprite + fondo + (body.dataset.sinMenu === undefined ? header : ""));
   
   // Función global de apertura/cierre para el widget unificado
+  // Función global de apertura/cierre para el widget unificado
+window.toggleChat = function() {
+    console.log("¡El botón del chat ha sido pulsado!"); // <-- Añade esto
+    var content = document.getElementById('chat-box-content');
+    var btn = document.getElementById('chat-toggle-btn');
+    if (!content || !btn) return;
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        btn.style.display = 'none';
+    } else {
+        content.style.display = 'none';
+        btn.style.display = 'flex';
+    }
+};
   window.toggleChat = function() {
       var content = document.getElementById('chat-box-content');
       var btn = document.getElementById('chat-toggle-btn');
