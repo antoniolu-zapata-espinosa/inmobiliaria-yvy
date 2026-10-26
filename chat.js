@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         // URL de tu backend en Render (reemplázala por tu URL real de Render si es distinta)
-        const BACKEND_URL = "https://tu-backend-en-render.onrender.com/api/chat";
+        const BACKEND_URL = "https://inmobiliaria-pnt2.onrender.com/api/chat";
 
         fetch(BACKEND_URL, {
             method: "POST",
