@@ -138,5 +138,37 @@
 <script src="../js/db.js"></script>
 <script src="../js/scoring.js"></script>
 <script src="../js/app.js"></script>
+<!-- ========================================== -->
+<!-- CHATBOT IA + BOTÓN WHATSAPP -->
+<!-- ========================================== -->
+
+<!-- 1. BOTÓN DE WHATSAPP (Abajo a la izquierda) -->
+<a href="https://wa.me/34600000000?text=Hola,%20estoy%20interesado%20en%20una%20propiedad%20de%20YVY%20Capital" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; left: 20px; z-index: 9999999; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-decoration: none; transition: transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'" 
+   onmouseout="this.style.transform='scale(1)'">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px; display: block;" />
+</a>
+
+<!-- 2. CHATBOT FLOTANTE DE IA (Abajo a la derecha) -->
+<div id="chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; z-index: 9999999; font-family: sans-serif; border: 2px solid #007bff; border-radius: 10px; padding: 15px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: #333333;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="margin: 0; color: #007bff; font-size: 15px; font-weight: bold;">Asistente YVY (IA)</h3>
+    </div>
+    
+    <div id="chat-messages" style="height: 200px; overflow-y: auto; border: 1px solid #ddd; background: #f9f9f9; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 13px; color: #333333;">
+        <p style="color: #333333; margin: 0;">¡Hola! Servidor listo.</p>
+    </div>
+
+    <div style="display: flex; gap: 5px;">
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; color: #333333; background: #ffffff;" />
+        <button id="chat-send" style="padding: 7px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">Enviar</button>
+    </div>
+</div>
+
+<!-- 3. CARGA DEL SCRIPT DEL CHAT -->
+<script src="chat.js">
+  </script>
 </body>
 </html>
