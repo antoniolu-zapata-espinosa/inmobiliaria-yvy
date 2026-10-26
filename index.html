@@ -177,38 +177,36 @@
 <script src="js/app.js"></script>
 <script src="js/portada.js"></script>
 <script src="js/particulas.js"></script>
+<!-- ========================================== -->
+<!-- CHATBOT IA + BOTÓN WHATSAPP -->
+<!-- ========================================== -->
 
-<!-- Chat flotante definitivo con estilos y colores asegurados -->
-<div id="chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; z-index: 999999; font-family: sans-serif; border: 2px solid #007bff; border-radius: 10px; padding: 15px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: #333333;">
+<!-- 1. BOTÓN DE WHATSAPP (Abajo a la izquierda) -->
+<a href="https://wa.me/34600000000?text=Hola,%20estoy%20interesado%20en%20una%20propiedad%20de%20YVY%20Capital" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; left: 20px; z-index: 9999999; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-decoration: none; transition: transform 0.2s ease;"
+   onmouseover="this.style.transform='scale(1.1)'" 
+   onmouseout="this.style.transform='scale(1)'">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px; height: 35px; display: block;" />
+</a>
+
+<!-- 2. CHATBOT FLOTANTE DE IA (Abajo a la derecha) -->
+<div id="chat-container" style="position: fixed; bottom: 20px; right: 20px; width: 320px; z-index: 9999999; font-family: sans-serif; border: 2px solid #007bff; border-radius: 10px; padding: 15px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.2); color: #333333;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <h3 style="margin: 0; color: #007bff; font-size: 15px;">Asistente YVY (IA)</h3>
+        <h3 style="margin: 0; color: #007bff; font-size: 15px; font-weight: bold;">Asistente YVY (IA)</h3>
     </div>
     
-    <!-- Ventana de mensajes con texto negro forzado -->
     <div id="chat-messages" style="height: 200px; overflow-y: auto; border: 1px solid #ddd; background: #f9f9f9; padding: 8px; margin-bottom: 10px; border-radius: 4px; font-size: 13px; color: #333333;">
         <p style="color: #333333; margin: 0;">¡Hola! Servidor listo.</p>
     </div>
 
-    <!-- Zona de escritura -->
     <div style="display: flex; gap: 5px;">
         <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 7px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; color: #333333; background: #ffffff;" />
         <button id="chat-send" style="padding: 7px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">Enviar</button>
     </div>
 </div>
 
-<!-- IMPORTANTE: El script de la IA se carga AQUÍ ABAJO, justo después del HTML del chat -->
+<!-- 3. CARGA DEL SCRIPT DEL CHAT -->
 <script src="chat.js"></script>
-<!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/34TU_NUMERO_AQUI?text=Hola,%20estoy%20interesado%20en%20una%20propiedad%20de%20YVY%20Capital" 
-   target="_blank" 
-   style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; background-color: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; transition: transform 0.3s ease;"
-   onmouseover="this.style.transform='scale(1.1)'" 
-   onmouseout="this.style.transform='scale(1)'">
-    
-    <!-- Icono SVG oficial de WhatsApp -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.601 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.342-.114-.003-.249-.003-.383-.003a.749.749 0 0 0-.549.252c-.19.198-.724.708-.724 1.728 0 1.02 1.03 2.008 1.17 2.14 1.399 1.319 2.474 1.65 3.356 1.947.452.148.852.126 1.174.077.365-.055 1.17-.478 1.334-.94.164-.462.164-.86.114-.941-.05-.084-.182-.133-.379-.232z"/>
-    </svg>
-</a>
 </body>
 </html>
