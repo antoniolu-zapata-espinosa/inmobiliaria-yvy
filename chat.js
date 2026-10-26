@@ -88,3 +88,15 @@ async function sendMessage() {
 
 sendBtn.onclick = sendMessage;
 inputField.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
+const inputField = document.getElementById('chat-input');
+const sendBtn = document.getElementById('chat-send');
+
+// Vincular el clic del botón
+sendBtn.addEventListener('click', sendMessage);
+
+// Vincular la tecla Enter para mayor comodidad
+inputField.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
