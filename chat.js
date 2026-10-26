@@ -1,9 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const sendBtn = document.getElementById('chat-send');
-    const chatMessages = document.getElementById('chat-messages');
+    const chatContainer = document.getElementById('chat-container');
+    
+    if (!chatContainer) {
+        console.error("No se encuentra el contenedor del chat.");
+        return;
+    }
 
-    if (!sendBtn) {
-        console.error("No se ha encontrado el botón 'chat-send'.");
+    // Buscamos los elementos DENTRO del contenedor flotante para evitar conflictos con otros IDs duplicados
+    const sendBtn = chatContainer.querySelector('#chat-send');
+    const inputField = chatContainer.querySelector('#chat-input');
+    const chatMessages = chatContainer.querySelector('#chat-messages');
+
+    if (!sendBtn || !inputField) {
+        console.error("Faltan elementos interactivos dentro del chat flotante.");
         return;
     }
 
@@ -12,25 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
         procesarEnvio();
     });
 
-    // Permitir enviar con Enter buscando el input dinámicamente
-    document.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && e.target && e.target.id === 'chat-input') {
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
             e.preventDefault();
             procesarEnvio();
         }
     });
 
     async function procesarEnvio() {
-        // Buscamos el input EN EL MOMENTO DE ENVIAR para evitar que sea undefined
-        const inputField = document.getElementById('chat-input');
-        const chatMessages = document.getElementById('chat-messages');
-
-        if (!inputField) {
-            console.error("No se encuentra el elemento con id 'chat-input'");
-            return;
-        }
-
-        const texto = inputField.value.trim();
+        const texto = inputField.value ? inputField.value.trim() : '';
         if (!texto) return;
 
         // Pintar mensaje del usuario
