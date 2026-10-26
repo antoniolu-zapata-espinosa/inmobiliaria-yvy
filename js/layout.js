@@ -68,23 +68,60 @@
       </div>
     </footer>`;
 
+  // NUEVOS BOTONES FLOTANTES: WhatsApp a la izquierda + Chatbot IA minimizado a la derecha
   const flotantes = `
-    <div class="flotantes">
-      <button class="fab fab--bot" id="bot-btn" aria-label="Abrir asistente" aria-expanded="false"><svg><use href="#i-chat"/></svg></button>
-      <a class="fab fab--wa" id="fab-wa" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg><use href="#i-wa"/></svg></a>
-    </div>
-    <div class="chat" id="chat" hidden role="dialog" aria-label="Asistente YVY">
-      <div class="chat__head"><div><b>Asistente YVY</b><small>Te ayudo a encontrar tu inversión</small></div><div class="chat__acc"><button id="chat-reiniciar" type="button" class="chat__reiniciar" aria-label="Reiniciar conversación" title="Reiniciar conversación"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.3-5.4M4.5 4.5v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Reiniciar</span></button><button id="chat-cerrar" type="button" aria-label="Cerrar">×</button></div></div>
-      <div class="chat__log" id="chat-log" aria-live="polite"></div>
-      <div class="chat__ops" id="chat-ops"></div>
-      <form class="chat__input" id="chat-input" hidden><label class="sr" for="chat-txt">Tu respuesta</label><input type="text" id="chat-txt"><button class="btn btn--noche" type="submit">Enviar</button></form>
+    <!-- 1. BOTÓN DE WHATSAPP (Abajo a la izquierda) -->
+    <a href="https://wa.me/34600000000?text=Hola,%20estoy%20interesado%20en%20una%20propiedad%20de%20YVY%20Capital" 
+       target="_blank" rel="noopener"
+       style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.3); text-decoration: none; transition: transform 0.2s ease;"
+       onmouseover="this.style.transform='scale(1.1)'" 
+       onmouseout="this.style.transform='scale(1)'"
+       aria-label="Contactar por WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 30px; height: 30px; display: block;" />
+    </a>
+
+    <!-- 2. CHATBOT FLOTANTE DE IA (Minimizado por defecto abajo a la derecha) -->
+    <div id="chat-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 999999; font-family: inherit;">
+        <button id="chat-toggle-btn" onclick="toggleChat()" style="background: #111820; color: #d4af37; border: 2px solid #d4af37; border-radius: 30px; padding: 12px 20px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
+            💬 Asistente YVY (IA)
+        </button>
+
+        <div id="chat-box-content" style="display: none; width: 320px; border: 1px solid #d4af37; border-radius: 12px; padding: 15px; background: #111820; box-shadow: 0 8px 24px rgba(0,0,0,0.4); color: #ffffff; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 8px;">
+                <h3 style="margin: 0; color: #d4af37; font-size: 15px; font-weight: 600;">Asistente YVY (IA)</h3>
+                <button onclick="toggleChat()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: #aaa; font-weight: bold;" aria-label="Cerrar chat">✕</button>
+            </div>
+            
+            <div id="chat-messages" style="height: 200px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1); background: #1a232f; padding: 10px; margin-bottom: 10px; border-radius: 6px; font-size: 13px; color: #e1e1e1;">
+                <p style="margin: 0;">¡Hola! ¿En qué puedo ayudarte hoy con tu inversión?</p>
+            </div>
+
+            <div style="display: flex; gap: 6px;">
+                <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 8px; border: 1px solid rgba(212,175,55,0.4); border-radius: 6px; font-size: 13px; color: #fff; background: #1a232f; outline: none;" />
+                <button id="chat-send" style="padding: 8px 14px; background: #d4af37; color: #111820; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold;">Enviar</button>
+            </div>
+        </div>
     </div>`;
 
   const fondo = `<div class="fondo" aria-hidden="true"><i></i><i></i><i></i></div>`;
 
   body.insertAdjacentHTML("afterbegin", sprite + fondo + (body.dataset.sinMenu === undefined ? header : ""));
+  
+  // Función global de apertura/cierre para el widget unificado
+  window.toggleChat = function() {
+      var content = document.getElementById('chat-box-content');
+      var btn = document.getElementById('chat-toggle-btn');
+      if (!content || !btn) return;
+      if (content.style.display === 'none') {
+          content.style.display = 'block';
+          btn.style.display = 'none';
+      } else {
+          content.style.display = 'none';
+          btn.style.display = 'flex';
+      }
+  };
+
   // Rayos de luz animados en el fondo (WebGL) y vídeos de fondo de portada y cabeceras.
-  // Se cargan aparte para no frenar el resto de la página.
   const cargarScript = archivo => {
     const s = document.createElement("script");
     s.src = B + "js/" + archivo;
@@ -93,8 +130,6 @@
   };
   if (document.querySelector("[data-video-fondo]")) cargarScript("video-fondo.js");
 
-  // Los rayos compilan un shader WebGL (tarea pesada): se cargan recién cuando se pueden ver.
-  // Si una portada con vídeo tapa la pantalla, al primer scroll; si no, cuando la página ya cargó y está libre.
   let rayosPedidos = false;
   const pedirRayos = () => { if (!rayosPedidos) { rayosPedidos = true; cargarScript("rayos.js"); } };
   const enReposo = fn => (window.requestIdleCallback ? requestIdleCallback(fn, { timeout: 3000 }) : setTimeout(fn, 1500));
@@ -104,7 +139,6 @@
   } else if (document.readyState === "complete") enReposo(pedirRayos);
   else addEventListener("load", () => enReposo(pedirRayos), { once: true });
 
-  // Cabecera de las páginas interiores: el isotipo grande, dibujándose, en lugar de una foto
   const cab = document.querySelector(".pagina-cab");
   if (cab) cab.insertAdjacentHTML("afterbegin", `<div class="pagina-cab__marca" aria-hidden="true">${logo()}</div>`);
 
@@ -115,8 +149,6 @@
   }
 
   /* ---------- Animación de entrada del logo ---------- */
-  // YVYAlTerminarIntro(fn) corre fn cuando termina la intro, o enseguida si ya terminó
-  // (sin esto, en la segunda visita el aviso llegaba antes de que cargaran los demás scripts).
   let introLista = false;
   const terminarIntro = () => {
     if (introLista) return;
@@ -128,8 +160,6 @@
     else document.addEventListener("yvy:intro-fin", fn, { once: true });
   };
   const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // La intro se ve al entrar a la web, no al volver a Inicio desde otra página del sitio.
-  // Recordarlo en sessionStorage es una preferencia: solo se guarda con ese consentimiento.
   const C = window.YVYConsentimiento;
   const prefs = !!(C && C.permite("preferencias"));
   let yaVista = false;
@@ -161,11 +191,10 @@
       terminarIntro();
       setTimeout(() => intro.remove(), 1300);
     };
-    setTimeout(cerrar, 2200); // la intro dura poco: la portada tiene que verse rápido
+    setTimeout(cerrar, 2200);
     intro.addEventListener("click", cerrar);
     addEventListener("keydown", cerrar, { once: true });
   } else {
-    // Sin intro, la portada arranca enseguida
     setTimeout(terminarIntro, 0);
   }
 })();
