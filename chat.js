@@ -39,7 +39,7 @@ async function sendMessage() {
 
     try {
         // Petición a tu servidor local en Node.js (puerto 3000)
-        const response = await fetch('http://localhost:3000/api/chat', {
+        const response = await fetch('https://inmobiliaria-pnt2.onrender.com/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
